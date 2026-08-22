@@ -90,6 +90,47 @@ Or execute commands directly:
 
 ---
 
+## ⚡ Clean Architecture + fpdart API Integration Pattern
+
+The scaffold includes a complete demo feature (`AgencyDashboardPage`) implementing the enterprise `fpdart` pattern:
+
+```
+┌──────────────┐     ┌──────────────┐     ┌─────────────────┐     ┌──────────────┐
+│  Presentation│ ──> │  AgencyBloc  │ ──> │     UseCase     │ ──> │  Repository  │
+│(BaseStateWid)│ <── │   (.fold())  │ <── │Either<Fail,Data>│ <── │(ResponseHand)│
+└──────────────┘     └──────────────┘     └─────────────────┘     └──────────────┘
+```
+
+1. **Failure Handling**:
+   ```dart
+   Failure getFailureFromAPI(String message);
+   Failure getFailureFromException(dynamic exception);
+   ```
+2. **UseCase Pattern**:
+   ```dart
+   class AgencyDashboardUsecase extends UseCase<AgencyDashboardModel, NoParamModelForUseCase> {
+     final ProfileRepository profileRepository;
+     ...
+     @override
+     Future<Either<Failure, AgencyDashboardModel>> call(NoParamModelForUseCase params) async {
+       final response = await profileRepository.agencyDashboard();
+       if (response.isSuccess) {
+         return right(AgencyDashboardModel.fromJson(response.result));
+       }
+       return left(getFailureFromAPI(response.message ?? ""));
+     }
+   }
+   ```
+3. **BLoC Event Handler**:
+   ```dart
+   response.fold(
+     (failure) => emit(state.copyWith(status: BaseStateStatus.failure, errorMessage: failure.message)),
+     (data) => emit(state.copyWith(status: BaseStateStatus.success, dashboardData: data)),
+   );
+   ```
+
+---
+
 ## 🤝 Contributing & Team Guidelines
 1. Always run `melos run format` and `melos run analyze` before committing.
 2. Pre-commit git hooks are configured to ensure code quality automatically.

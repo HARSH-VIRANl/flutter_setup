@@ -88,6 +88,23 @@ class AppDrawer extends StatelessWidget {
                         }
                       },
                     ),
+                    ListTile(
+                      leading: const Icon(Icons.analytics_rounded),
+                      title: Text(
+                        'Demo API Dashboard',
+                        style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(
+                        'fpdart + Clean Architecture',
+                        style: GoogleFonts.poppins(fontSize: 11.sp, color: Colors.grey),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        if (ModalRoute.of(context)?.settings.name != AppRoutes.demo) {
+                          Navigator.pushNamed(context, AppRoutes.demo);
+                        }
+                      },
+                    ),
                     const Divider(),
                     // Dark Mode Toggle
                     SwitchListTile.adaptive(

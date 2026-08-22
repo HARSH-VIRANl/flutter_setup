@@ -8,6 +8,9 @@ class APIConstant {
 
   //product list API endpoint
   static const String products = 'products';
+
+  // agency dashboard demo endpoint
+  static const String agencyDashboard = 'https://jsonplaceholder.typicode.com/users';
 }
 
 T? tryParseJsonObject<T>(Function fun) {

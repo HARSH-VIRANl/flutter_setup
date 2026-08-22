@@ -17,6 +17,7 @@ dependencies:
   external_path: ^3.0.0
   flutter:
     sdk: flutter
+  fpdart: ^1.1.1
   flutter_localizations:
     sdk: flutter
   flutter_bloc: ^9.1.1

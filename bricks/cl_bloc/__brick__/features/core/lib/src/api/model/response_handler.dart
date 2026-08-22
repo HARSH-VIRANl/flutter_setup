@@ -29,7 +29,25 @@ class ResponseHandler {
 
   factory ResponseHandler.fromJson(dynamic json) {
     if (json is Map<String, dynamic>) {
-      return ResponseHandler.fromJsonHidden(json);
+      if (json.containsKey('result') || json.containsKey('status')) {
+        return ResponseHandler.fromJsonHidden(json);
+      } else {
+        return ResponseHandler(
+          status: 200,
+          httpStatus: 200,
+          error: false,
+          message: 'Success',
+          result: json,
+        );
+      }
+    } else if (json is List) {
+      return ResponseHandler(
+        status: 200,
+        httpStatus: 200,
+        error: false,
+        message: 'Success',
+        result: {'totalClients': json.length, 'users': json},
+      );
     } else {
       return ResponseHandler(
         status: 500,

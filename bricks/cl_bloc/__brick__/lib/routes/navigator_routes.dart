@@ -27,6 +27,11 @@ class NavigatorRoutes {
           settings: settings,
           builder: (_) => const SettingsPage(),
         );
+      case AppRoutes.demo:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const DemoPage(),
+        );
       default:
         return MaterialPageRoute(
           settings: settings,

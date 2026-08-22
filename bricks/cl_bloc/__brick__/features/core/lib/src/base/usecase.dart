@@ -1,14 +1,12 @@
 import 'package:core/core_exports.dart';
 
-class UseCase {
-  String getMessage(Exception e) {
-    if (e is CustomException) {
-      return e.message;
-    }
-    return S.current.noInternetConnection;
-  }
+abstract class UseCase<Type, Params> {
+  Future<Either<Failure, Type>> call(Params params);
+}
 
-  void l(dynamic s) {
-    AppLogger.w(s);
-  }
+class NoParamModelForUseCase extends Equatable {
+  const NoParamModelForUseCase();
+
+  @override
+  List<Object?> get props => [];
 }
