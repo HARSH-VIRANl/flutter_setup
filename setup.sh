@@ -7,9 +7,9 @@ set -euo pipefail
 #    bash setup.sh
 # ─────────────────────────────────────────────────────────────────────────────
 
-REPO_URL="https://github.com/HARSH-VIRANl/Flutter_Project_SetUp.git"
-REPO_DIR="Flutter_Project_SetUp"
-BRANCH="bloc_bricks_new"
+REPO_URL="https://github.com/HARSH-VIRANl/flutter_setup.git"
+REPO_DIR="flutter_setup"
+BRANCH="main"
 BRICK_PATH="$REPO_DIR/bricks/cl_bloc"
 PAGE_BRICK_PATH="$REPO_DIR/bricks/cl_page"
 
