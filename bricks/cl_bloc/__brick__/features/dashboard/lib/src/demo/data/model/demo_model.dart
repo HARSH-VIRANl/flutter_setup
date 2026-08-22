@@ -1,4 +1,4 @@
-import 'package:equatable/equatable.dart';
+import 'package:core/core_exports.dart';
 
 class DemoUserModel extends Equatable {
   final int id;
