@@ -13,53 +13,61 @@ scripts:
   # ── Setup ──────────────────────────────────────────────────────────────────
   bootstrap:
     run: melos exec -- flutter pub get
-    description: Install dependencies for all packages
+    description: Install dependencies for all packages (e.g. melos run bootstrap)
 
-  # ── Quality ────────────────────────────────────────────────────────────────
+  # ── Quality & Linting ──────────────────────────────────────────────────────
   analyze:
     run: melos exec -- flutter analyze --fatal-infos
-    description: Run dart analyze across all packages
+    description: Run dart analyze with fatal infos across all packages (e.g. melos run analyze)
 
   format:
     run: melos exec -- dart format .
-    description: Format all Dart code
+    description: Format all Dart code in workspace (e.g. melos run format)
 
   format:check:
     run: melos exec -- dart format --output=none --set-exit-if-changed .
-    description: Check formatting (no changes made) — used in CI
+    description: Check formatting without changes for CI (e.g. melos run format:check)
 
   fix:
     run: melos exec -- dart fix --apply
-    description: Apply dart fixes across all packages
+    description: Apply automatic dart fixes across all packages (e.g. melos run fix)
 
   # ── Testing ────────────────────────────────────────────────────────────────
   test:
     run: melos exec --fail-fast -- flutter test
-    description: Run tests across all packages
+    description: Run unit & widget tests across all packages (e.g. melos run test)
 
   test:coverage:
     run: melos exec -- flutter test --coverage
-    description: Run tests with coverage
+    description: Run tests with lcov coverage report (e.g. melos run test:coverage)
 
   # ── Build ──────────────────────────────────────────────────────────────────
   build:android:
     run: flutter build apk --release
-    description: Build Android release APK
+    description: Build Android release APK (e.g. melos run build:android)
 
   build:ios:
     run: flutter build ios --release --no-codesign
-    description: Build iOS release (no codesign)
+    description: Build iOS release without codesign (e.g. melos run build:ios)
 
   build:runner:
     run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
-    description: Run build_runner for code generation (json_serializable, flutter_gen etc.)
+    description: Run build_runner code generation across all packages (e.g. melos run build:runner)
 
-  # ── Code Generation ────────────────────────────────────────────────────────
+  # ── Code Generation (Mason Bricks) ─────────────────────────────────────────
   gen:page:
     run: mason make cl_page -o lib/screens
-    description: Generate a new BLoC page/feature in lib/screens (e.g. melos run gen:page -- --name profile)
+    description: Generate a new BLoC page in lib/screens (e.g. melos run gen:page -- --name profile)
+
+  gen:page:dashboard:
+    run: mason make cl_page -o features/dashboard/lib/src
+    description: Generate a new BLoC page in features/dashboard (e.g. melos run gen:page:dashboard -- --name profile)
+
+  gen:page:auth:
+    run: mason make cl_page -o features/auth/lib/src
+    description: Generate a new BLoC page in features/auth (e.g. melos run gen:page:auth -- --name forgot_password)
 
   # ── Cleanup ────────────────────────────────────────────────────────────────
   clean:
     run: melos exec -- flutter clean
-    description: Clean all packages
+    description: Clean build cache across all packages (e.g. melos run clean)

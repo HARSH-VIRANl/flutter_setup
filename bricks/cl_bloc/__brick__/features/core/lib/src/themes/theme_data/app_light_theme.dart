@@ -21,21 +21,25 @@ final ThemeData appLightTheme = ThemeData(
   highlightColor: LightThemeColor.highlightColor,
   splashColor: LightThemeColor.splashColor,
   appBarTheme: AppBarTheme(
-    backgroundColor: LightThemeColor.primaryColorLight.withValues(alpha: 0.2),
-    foregroundColor: LightThemeColor.cardColor,
+    backgroundColor: LightThemeColor.backgroundColor,
+    foregroundColor: LightThemeColor.primaryTextColor,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 22.sp,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w600,
-      color: LightThemeColor.secondaryTextColor,
+      color: LightThemeColor.primaryTextColor,
     ),
     systemOverlayStyle: const SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+      statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Brightness.light,
     ),
     elevation: 0,
     centerTitle: false,
-    titleSpacing: 0.w,
-    toolbarHeight: 64.h,
+    iconTheme: const IconThemeData(
+      color: LightThemeColor.primaryTextColor,
+    ),
+    actionsIconTheme: const IconThemeData(
+      color: LightThemeColor.primaryTextColor,
+    ),
   ),
   disabledColor: LightThemeColor.secondaryColor,
   indicatorColor: LightThemeColor.primaryColor,

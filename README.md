@@ -61,16 +61,22 @@ To view and run all available tasks interactively:
 melos run
 ```
 
-Or execute commands directly:
-| Command | Description |
-|---|---|
-| `melos run build:runner` | Run `build_runner` code generation across all packages |
-| `melos run format` | Format all Dart code |
-| `melos run analyze` | Analyze all packages with `--fatal-infos` |
-| `melos run test` | Run tests across all workspace packages |
-| `melos run test:coverage` | Run tests with code coverage |
-| `melos run fix` | Apply automated Dart fixes |
-| `melos run gen:page` | Generate a new BLoC screen/feature via `cl_page` brick |
+| Command | Description | Example |
+|---|---|---|
+| `bootstrap` | Install dependencies for all packages | `melos run bootstrap` |
+| `build:runner` | Run `build_runner` code generation | `melos run build:runner` |
+| `format` | Format all Dart code | `melos run format` |
+| `format:check` | Check formatting for CI without changes | `melos run format:check` |
+| `analyze` | Analyze all packages with `--fatal-infos` | `melos run analyze` |
+| `fix` | Apply automated Dart fixes | `melos run fix` |
+| `test` | Run unit/widget tests across all packages | `melos run test` |
+| `test:coverage` | Run tests with coverage reports | `melos run test:coverage` |
+| `build:android` | Build release Android APK | `melos run build:android` |
+| `build:ios` | Build release iOS app | `melos run build:ios` |
+| `gen:page` | Generate BLoC screen in `lib/screens` | `melos run gen:page -- --name profile` |
+| `gen:page:dashboard` | Generate BLoC page in `features/dashboard` | `melos run gen:page:dashboard -- --name profile` |
+| `gen:page:auth` | Generate BLoC page in `features/auth` | `melos run gen:page:auth -- --name forgot_password` |
+| `clean` | Clean build cache across all packages | `melos run clean` |
 
 ---
 
@@ -83,7 +89,7 @@ Or execute commands directly:
 │   ├── auth/                # Authentication feature package
 │   └── dashboard/           # Dashboard feature package
 ├── assets/
-│   └── fonts/               # ProzaLibre & OpenSans fonts
+│   └── fonts/               # ProzaLibre fonts
 ├── bricks/                  # Mason bricks (cl_bloc, cl_page)
 └── pubspec.yaml             # Pub Workspace root + Melos configuration
 ```
@@ -131,6 +137,25 @@ The scaffold includes a complete demo feature (`AgencyDashboardPage`) implementi
 
 ---
 
+## 🌐 Internationalization (intl & l10n) Guidelines
+
+All user-facing strings **must** come from ARB files via `S.of(context)` (or `S.current` outside widget trees):
+
+1. **Add keys to ARB files**:
+   - `lib/l10n/intl_en.arb` (English)
+   - `lib/l10n/intl_hi.arb` (Hindi)
+2. **Access in widgets**:
+   ```dart
+   Text(S.of(context).home);
+   Text(S.of(context).welcomeMessage);
+   ```
+3. **Form Validations**:
+   - Use `ValidationMixin` on `BuildContext` which automatically uses localized validation messages.
+
+---
+
 ## 🤝 Contributing & Team Guidelines
-1. Always run `melos run format` and `melos run analyze` before committing.
-2. Pre-commit git hooks are configured to ensure code quality automatically.
+1. Always use localized strings via `S.of(context)` instead of hardcoded strings.
+2. Always run `melos run format` and `melos run analyze` before committing.
+3. Pre-commit git hooks are configured to ensure code quality automatically.
+

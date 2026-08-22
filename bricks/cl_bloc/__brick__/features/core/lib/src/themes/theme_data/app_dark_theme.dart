@@ -9,17 +9,23 @@ final ThemeData appDarkTheme = ThemeData(
   primaryColor: DarkThemeColor.primaryColor,
   appBarTheme: AppBarTheme(
     backgroundColor: DarkThemeColor.primaryColorDark,
-    foregroundColor: DarkThemeColor.cardColor,
+    foregroundColor: DarkThemeColor.textColor,
     titleTextStyle: GoogleFonts.poppins(
-      fontSize: 22.sp,
+      fontSize: 20.sp,
       fontWeight: FontWeight.w600,
       color: DarkThemeColor.textColor,
     ),
+    systemOverlayStyle: const SystemUiOverlayStyle(
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    ),
     elevation: 0,
     centerTitle: false,
-    titleSpacing: 24.w,
+    iconTheme: const IconThemeData(
+      color: DarkThemeColor.textColor,
+    ),
     actionsIconTheme: const IconThemeData(
-      color: DarkThemeColor.cardColor,
+      color: DarkThemeColor.textColor,
     ),
   ),
   textTheme: GoogleFonts.poppinsTextTheme().apply(

@@ -83,6 +83,29 @@ class S {
   String get logout => Intl.message('Logout', name: 'logout');
   String get profile => Intl.message('Profile', name: 'profile');
   String get notifications => Intl.message('Notifications', name: 'notifications');
+  String get retry => Intl.message('Retry', name: 'retry');
+  String get demoCleanArchitecture => Intl.message('Demo Clean Architecture', name: 'demoCleanArchitecture');
+  String get reloadApi => Intl.message('Reload API', name: 'reloadApi');
+  String get fetchingUsers => Intl.message('Fetching real-time users from jsonplaceholder.typicode.com...', name: 'fetchingUsers');
+  String get noUsersFound => Intl.message('No users found.', name: 'noUsersFound');
+  String get liveUsersList => Intl.message('Live Users List', name: 'liveUsersList');
+  String get usersLoaded => Intl.message('Users Loaded', name: 'usersLoaded');
+  String get demoApiDashboard => Intl.message('Demo API Dashboard', name: 'demoApiDashboard');
+  String get demoApiSubtitle => Intl.message('fpdart Either • UseCase • BaseStateWidget', name: 'demoApiSubtitle');
+  String get drawerTip => Intl.message('Open the drawer (≡) to switch Dark Mode and Language.', name: 'drawerTip');
+  String get darkThemeActive => Intl.message('Dark theme active', name: 'darkThemeActive');
+  String get lightThemeActive => Intl.message('Light theme active', name: 'lightThemeActive');
+  String get themeDark => Intl.message('Dark', name: 'themeDark');
+  String get cancel => Intl.message('Cancel', name: 'cancel');
+  String get confirm => Intl.message('Confirm', name: 'confirm');
+  String get ok => Intl.message('OK', name: 'ok');
+  String get forgotPassword => Intl.message('Forgot Password?', name: 'forgotPassword');
+  String get dontHaveAccount => Intl.message('Don\'t have an account? ', name: 'dontHaveAccount');
+  String get sendResetLink => Intl.message('Send Reset Link', name: 'sendResetLink');
+  String get resetPasswordDescription => Intl.message('Enter your email to receive a password reset link', name: 'resetPasswordDescription');
+  String get createAccount => Intl.message('Create Account', name: 'createAccount');
+  String get createAccountSubtitle => Intl.message('Sign up to get started', name: 'createAccountSubtitle');
+  String get backToLogin => Intl.message('Back to Login', name: 'backToLogin');
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

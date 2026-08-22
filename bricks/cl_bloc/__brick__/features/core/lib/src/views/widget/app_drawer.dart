@@ -91,11 +91,11 @@ class AppDrawer extends StatelessWidget {
                     ListTile(
                       leading: const Icon(Icons.analytics_rounded),
                       title: Text(
-                        'Demo API Dashboard',
+                        S.of(context).demoApiDashboard,
                         style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
                       ),
                       subtitle: Text(
-                        'fpdart + Clean Architecture',
+                        S.of(context).demoApiSubtitle,
                         style: GoogleFonts.poppins(fontSize: 11.sp, color: Colors.grey),
                       ),
                       onTap: () {
@@ -140,7 +140,7 @@ class AppDrawer extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12.r),
                         ),
                         child: Text(
-                          isHindi ? 'हिंदी' : 'English',
+                          isHindi ? S.of(context).hindi : S.of(context).english,
                           style: GoogleFonts.poppins(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,

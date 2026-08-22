@@ -1,13 +1,13 @@
+import 'package:core/core_exports.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CommonDialog {
   static Future<bool?> showConfirmDialog({
     required BuildContext context,
     required String title,
     required String message,
-    String confirmText = 'Confirm',
-    String cancelText = 'Cancel',
+    String? confirmText,
+    String? cancelText,
     Color? confirmColor,
     bool barrierDismissible = true,
   }) {
@@ -24,7 +24,7 @@ class CommonDialog {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: Text(cancelText),
+                child: Text(cancelText ?? S.of(context).cancel),
               ),
               TextButton(
                 onPressed: () => Navigator.pop(context, true),
@@ -32,7 +32,7 @@ class CommonDialog {
                   foregroundColor:
                       confirmColor ?? Theme.of(context).primaryColor,
                 ),
-                child: Text(confirmText),
+                child: Text(confirmText ?? S.of(context).confirm),
               ),
             ],
           ),
@@ -43,7 +43,7 @@ class CommonDialog {
     required BuildContext context,
     required String title,
     required String message,
-    String buttonText = 'OK',
+    String? buttonText,
     bool barrierDismissible = true,
   }) {
     return showDialog(
@@ -59,7 +59,7 @@ class CommonDialog {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(buttonText),
+                child: Text(buttonText ?? S.of(context).ok),
               ),
             ],
           ),

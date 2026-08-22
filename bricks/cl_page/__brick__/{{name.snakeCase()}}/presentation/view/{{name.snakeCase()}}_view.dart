@@ -13,7 +13,10 @@ class {{name.pascalCase()}}View extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           '{{name.titleCase()}}',
-          style: GoogleFonts.poppins(fontWeight: FontWeight.w600),
+          style: GoogleFonts.poppins(
+            fontWeight: FontWeight.w600,
+            color: theme.appBarTheme.titleTextStyle?.color ?? theme.colorScheme.onSurface,
+          ),
         ),
         centerTitle: false,
       ),

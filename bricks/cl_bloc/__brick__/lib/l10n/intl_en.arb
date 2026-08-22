@@ -44,5 +44,22 @@
   "selectLanguage": "Select Language",
   "logout": "Logout",
   "profile": "Profile",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "retry": "Retry",
+  "demoCleanArchitecture": "Demo Clean Architecture",
+  "reloadApi": "Reload API",
+  "fetchingUsers": "Fetching real-time users from jsonplaceholder.typicode.com...",
+  "noUsersFound": "No users found.",
+  "liveUsersList": "Live Users List",
+  "usersLoaded": "Users Loaded",
+  "demoApiDashboard": "Demo API Dashboard",
+  "demoApiSubtitle": "fpdart Either • UseCase • BaseStateWidget",
+  "drawerTip": "Open the drawer (≡) to switch Dark Mode and Language.",
+  "darkThemeActive": "Dark theme active",
+  "lightThemeActive": "Light theme active",
+  "themeDark": "Dark",
+  "themeLight": "Light",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "ok": "OK"
 }

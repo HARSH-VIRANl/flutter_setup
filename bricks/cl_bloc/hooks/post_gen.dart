@@ -79,11 +79,6 @@ Future<void> _writePubspecConfig(HookContext context) async {
         buffer.writeln('        - asset: assets/fonts/ProzaLibre_Bold.ttf');
         buffer.writeln('        - asset: assets/fonts/ProzaLibre_SemiBold.ttf');
         buffer.writeln('          weight: 600');
-        buffer.writeln('    - family: OpenSans');
-        buffer.writeln('      fonts:');
-        buffer.writeln('        - asset: assets/fonts/OpenSans_Regular.ttf');
-        buffer.writeln('        - asset: assets/fonts/OpenSans_SemiBold.ttf');
-        buffer.writeln('          weight: 600');
       }
     }
 
@@ -117,37 +112,46 @@ Future<void> _writePubspecConfig(HookContext context) async {
     buffer.writeln('  scripts:');
     buffer.writeln('    bootstrap:');
     buffer.writeln('      run: melos exec -- flutter pub get');
-    buffer.writeln('      description: Install dependencies for all packages');
+    buffer.writeln('      description: Install dependencies for all packages (e.g. melos run bootstrap)');
     buffer.writeln('    analyze:');
     buffer.writeln('      run: melos exec -- flutter analyze --fatal-infos');
-    buffer.writeln('      description: Run dart analyze across all packages');
+    buffer.writeln('      description: Run dart analyze across all packages (e.g. melos run analyze)');
     buffer.writeln('    format:');
     buffer.writeln('      run: melos exec -- dart format .');
-    buffer.writeln('      description: Format all Dart code');
+    buffer.writeln('      description: Format all Dart code (e.g. melos run format)');
     buffer.writeln('    format:check:');
     buffer.writeln('      run: melos exec -- dart format --output=none --set-exit-if-changed .');
-    buffer.writeln('      description: Check formatting without modifying');
+    buffer.writeln('      description: Check formatting without changes for CI (e.g. melos run format:check)');
     buffer.writeln('    fix:');
     buffer.writeln('      run: melos exec -- dart fix --apply');
-    buffer.writeln('      description: Apply dart fixes across all packages');
+    buffer.writeln('      description: Apply dart fixes across all packages (e.g. melos run fix)');
     buffer.writeln('    test:');
     buffer.writeln('      run: melos exec --fail-fast -- flutter test');
-    buffer.writeln('      description: Run tests across all packages');
+    buffer.writeln('      description: Run tests across all packages (e.g. melos run test)');
     buffer.writeln('    test:coverage:');
     buffer.writeln('      run: melos exec -- flutter test --coverage');
-    buffer.writeln('      description: Run tests with coverage');
+    buffer.writeln('      description: Run tests with coverage (e.g. melos run test:coverage)');
     buffer.writeln('    build:android:');
     buffer.writeln('      run: flutter build apk --release');
-    buffer.writeln('      description: Build Android release APK');
+    buffer.writeln('      description: Build Android release APK (e.g. melos run build:android)');
     buffer.writeln('    build:ios:');
     buffer.writeln('      run: flutter build ios --release --no-codesign');
-    buffer.writeln('      description: Build iOS release');
+    buffer.writeln('      description: Build iOS release (e.g. melos run build:ios)');
     buffer.writeln('    build:runner:');
     buffer.writeln('      run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs');
-    buffer.writeln('      description: Run build_runner for code generation');
+    buffer.writeln('      description: Run build_runner for code generation (e.g. melos run build:runner)');
     buffer.writeln('    gen:page:');
     buffer.writeln('      run: mason make cl_page -o lib/screens');
-    buffer.writeln('      description: Generate a new BLoC page/feature');
+    buffer.writeln('      description: Generate a new BLoC page in lib/screens (e.g. melos run gen:page -- --name profile)');
+    buffer.writeln('    gen:page:dashboard:');
+    buffer.writeln('      run: mason make cl_page -o features/dashboard/lib/src');
+    buffer.writeln('      description: Generate a new BLoC page in features/dashboard (e.g. melos run gen:page:dashboard -- --name profile)');
+    buffer.writeln('    gen:page:auth:');
+    buffer.writeln('      run: mason make cl_page -o features/auth/lib/src');
+    buffer.writeln('      description: Generate a new BLoC page in features/auth (e.g. melos run gen:page:auth -- --name forgot_password)');
+    buffer.writeln('    clean:');
+    buffer.writeln('      run: melos exec -- flutter clean');
+    buffer.writeln('      description: Clean all packages (e.g. melos run clean)');
 
     // ── Single atomic write ───────────────────────────────────────────────
     await pubSpecFile.writeAsString(buffer.toString());

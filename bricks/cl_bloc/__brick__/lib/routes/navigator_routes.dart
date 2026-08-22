@@ -17,6 +17,16 @@ class NavigatorRoutes {
           settings: settings,
           builder: (_) => const LoginPage(),
         );
+      case AppRoutes.register:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const RegisterPage(),
+        );
+      case AppRoutes.forgotPassword:
+        return MaterialPageRoute(
+          settings: settings,
+          builder: (_) => const ForgotPasswordPage(),
+        );
       case AppRoutes.home:
         return MaterialPageRoute(
           settings: settings,

@@ -88,22 +88,29 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<AppSettingsBloc>(create: (context) => baseBloc),
       ],
-      child: BlocBuilder<AppSettingsBloc, AppSettingsState>(
-        builder: (context, state) {
-          return ScreenUtilInit(
-            designSize: const Size(430, 932),
-            builder: (context, child) {
+      child: ScreenUtilInit(
+        designSize: const Size(430, 932),
+        minTextAdapt: true,
+        builder: (context, child) {
+          return BlocBuilder<AppSettingsBloc, AppSettingsState>(
+            buildWhen: (previous, current) =>
+                previous.isDarkMode != current.isDarkMode ||
+                previous.locale != current.locale ||
+                previous.isConnected != current.isConnected,
+            builder: (context, state) {
               return MaterialApp(
                 navigatorKey: NavigationService.navigatorKey,
                 scaffoldMessengerKey: messengerKey,
                 title: EnvConfig.appTitle,
-                theme: state.isDarkMode ? appDarkTheme : appLightTheme,
+                theme: appLightTheme,
+                darkTheme: appDarkTheme,
+                themeMode: state.isDarkMode ? ThemeMode.dark : ThemeMode.light,
                 locale: Locale(state.locale),
                 supportedLocales: const [
                   Locale('en'),
                   Locale('hi'),
                 ],
-                localizationsDelegates: [
+                localizationsDelegates: const [
                   AppLocalizationDelegate(),
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
@@ -113,17 +120,15 @@ class _MyAppState extends State<MyApp> {
                 onGenerateRoute: NavigatorRoutes.generateRoute,
                 initialRoute: AppRoutes.root,
                 builder: (context, child) {
-                  return BlocBuilder<AppSettingsBloc, AppSettingsState>(
-                    builder: (context, state) => Stack(
-                      children: [
-                        child ?? const Offstage(),
-                        SafeArea(
-                          child: NoInternetWidget(
-                            isConnected: state.isConnected,
-                          ),
+                  return Stack(
+                    children: [
+                      child ?? const Offstage(),
+                      SafeArea(
+                        child: NoInternetWidget(
+                          isConnected: state.isConnected,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   );
                 },
               );

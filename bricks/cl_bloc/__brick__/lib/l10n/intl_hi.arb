@@ -44,5 +44,22 @@
   "selectLanguage": "भाषा चुनें",
   "logout": "लॉग आउट",
   "profile": "प्रोफ़ाइल",
-  "notifications": "सूचनाएं"
+  "notifications": "सूचनाएं",
+  "retry": "पुनः प्रयास करें",
+  "demoCleanArchitecture": "डेमो क्लीन आर्किटेक्चर",
+  "reloadApi": "एपीआई पुनः लोड करें",
+  "fetchingUsers": "jsonplaceholder.typicode.com से रीयल-टाइम उपयोगकर्ता लोड हो रहे हैं...",
+  "noUsersFound": "कोई उपयोगकर्ता नहीं मिला।",
+  "liveUsersList": "लाइव उपयोगकर्ता सूची",
+  "usersLoaded": "उपयोगकर्ता लोड हुए",
+  "demoApiDashboard": "डेमो एपीआई डैशबोर्ड",
+  "demoApiSubtitle": "fpdart Either • UseCase • BaseStateWidget",
+  "drawerTip": "डार्क मोड और भाषा बदलने के लिए ड्रॉवर (≡) खोलें।",
+  "darkThemeActive": "डार्क थीम सक्रिय",
+  "lightThemeActive": "लाइट थीम सक्रिय",
+  "themeDark": "डार्क",
+  "themeLight": "लाइट",
+  "cancel": "रद्द करें",
+  "confirm": "पुष्टि करें",
+  "ok": "ठीक है"
 }

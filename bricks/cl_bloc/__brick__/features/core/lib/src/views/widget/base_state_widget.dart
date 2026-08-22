@@ -112,7 +112,7 @@ class BaseStateWidget extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh),
-                label: Text(S.of(context).somethingWentWrong),
+                label: Text(S.of(context).retry),
               ),
             ],
           ],
@@ -144,7 +144,7 @@ class BaseStateWidget extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
+                label: Text(S.of(context).retry),
               ),
             ],
           ],
