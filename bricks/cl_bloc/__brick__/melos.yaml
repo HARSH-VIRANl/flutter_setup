@@ -54,6 +54,11 @@ scripts:
     run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
     description: Run build_runner for code generation (json_serializable, flutter_gen etc.)
 
+  # ── Code Generation ────────────────────────────────────────────────────────
+  gen:page:
+    run: mason make cl_page -o lib/screens
+    description: Generate a new BLoC page/feature in lib/screens (e.g. melos run gen:page -- --name profile)
+
   # ── Cleanup ────────────────────────────────────────────────────────────────
   clean:
     run: melos exec -- flutter clean
