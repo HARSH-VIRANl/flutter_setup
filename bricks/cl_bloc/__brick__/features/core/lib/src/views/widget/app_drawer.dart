@@ -156,7 +156,7 @@ class AppDrawer extends StatelessWidget {
                 ),
                 onTap: () async {
                   Navigator.pop(context);
-                  final pref = Injector.instance.get<AppPreference>();
+                  final pref = GetIt.instance.get<AppPreference>();
                   await pref.writeBool(PreferenceConstants.isUserLoggedInKey, false);
                   if (context.mounted) {
                     Navigator.pushNamedAndRemoveUntil(

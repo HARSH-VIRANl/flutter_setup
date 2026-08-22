@@ -8,9 +8,11 @@ class BaseStateWidget extends StatelessWidget {
   final Widget Function()? onEmpty;
   final Widget Function(String? error)? onError;
   final Widget Function()? onInitial;
+  final Widget Function()? onNoInternet;
   final String? errorMessage;
   final String? emptyMessage;
   final String? loadingMessage;
+  final String? noInternetMessage;
   final VoidCallback? onRetry;
 
   const BaseStateWidget({
@@ -21,9 +23,11 @@ class BaseStateWidget extends StatelessWidget {
     this.onEmpty,
     this.onError,
     this.onInitial,
+    this.onNoInternet,
     this.errorMessage,
     this.emptyMessage,
     this.loadingMessage,
+    this.noInternetMessage,
     this.onRetry,
   });
 
@@ -36,6 +40,8 @@ class BaseStateWidget extends StatelessWidget {
       BaseStateStatus.empty => onEmpty?.call() ?? _buildEmpty(context),
       BaseStateStatus.failure =>
         onError?.call(errorMessage) ?? _buildError(context),
+      BaseStateStatus.noInternet =>
+        onNoInternet?.call() ?? _buildNoInternet(context),
     };
   }
 
@@ -114,6 +120,38 @@ class BaseStateWidget extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildNoInternet(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.all(24.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.wifi_off_rounded,
+              size: 64.sp,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            SizedBox(height: 16.h),
+            Text(
+              noInternetMessage ?? S.of(context).noInternetConnection,
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
+            if (onRetry != null) ...[
+              SizedBox(height: 24.h),
+              ElevatedButton.icon(
+                onPressed: onRetry,
+                icon: const Icon(Icons.refresh),
+                label: const Text('Retry'),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 /// A Sliver version of BaseStateWidget for use in CustomScrollView
@@ -124,9 +162,11 @@ class BaseStateSliverWidget extends StatelessWidget {
   final Widget Function()? onEmpty;
   final Widget Function(String? error)? onError;
   final Widget Function()? onInitial;
+  final Widget Function()? onNoInternet;
   final String? errorMessage;
   final String? emptyMessage;
   final String? loadingMessage;
+  final String? noInternetMessage;
   final VoidCallback? onRetry;
 
   const BaseStateSliverWidget({
@@ -137,9 +177,11 @@ class BaseStateSliverWidget extends StatelessWidget {
     this.onEmpty,
     this.onError,
     this.onInitial,
+    this.onNoInternet,
     this.errorMessage,
     this.emptyMessage,
     this.loadingMessage,
+    this.noInternetMessage,
     this.onRetry,
   });
 
@@ -158,9 +200,11 @@ class BaseStateSliverWidget extends StatelessWidget {
         onEmpty: onEmpty,
         onError: onError,
         onInitial: onInitial,
+        onNoInternet: onNoInternet,
         errorMessage: errorMessage,
         emptyMessage: emptyMessage,
         loadingMessage: loadingMessage,
+        noInternetMessage: noInternetMessage,
         onRetry: onRetry,
       ),
     );
