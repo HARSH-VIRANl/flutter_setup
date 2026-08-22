@@ -177,6 +177,14 @@ Future<void> _installDependencies(HookContext context) async {
     } else {
       progress.fail('flutter pub get failed:\n${result.stderr}');
     }
+
+    // Resolve mason bricks locally
+    await Process.run(
+      'mason',
+      ['get'],
+      workingDirectory: Directory.current.path,
+      runInShell: true,
+    );
   } catch (e) {
     progress.fail('Unable to run flutter pub get: ${e.toString()}');
   }

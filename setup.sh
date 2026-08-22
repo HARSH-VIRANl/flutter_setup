@@ -91,9 +91,9 @@ echo ""
 
 echo "🧱 Registering 'cl_bloc' and 'cl_page' bricks..."
 $MASON_CMD remove -g cl_bloc 2>/dev/null || true
-$MASON_CMD add -g cl_bloc --path "$BRICK_PATH"
+$MASON_CMD add -g cl_bloc --git-url "$REPO_URL" --git-path "bricks/cl_bloc" || $MASON_CMD add -g cl_bloc --path "$BRICK_PATH"
 $MASON_CMD remove -g cl_page 2>/dev/null || true
-$MASON_CMD add -g cl_page --path "$PAGE_BRICK_PATH"
+$MASON_CMD add -g cl_page --git-url "$REPO_URL" --git-path "bricks/cl_page" || $MASON_CMD add -g cl_page --path "$PAGE_BRICK_PATH"
 echo "✅ Bricks registered."
 echo ""
 

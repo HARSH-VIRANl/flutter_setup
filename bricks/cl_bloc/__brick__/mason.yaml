@@ -1,0 +1,5 @@
+bricks:
+  cl_page:
+    git:
+      url: https://github.com/HARSH-VIRANl/flutter_setup.git
+      path: bricks/cl_page
