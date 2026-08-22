@@ -1,0 +1,12 @@
+name: cl_page
+description: A Mason brick for generating a complete BLoC feature page (Bloc, Event, State, Page, and View).
+version: 1.0.0
+
+environment:
+  mason: ^0.1.1
+
+vars:
+  name:
+    type: string
+    description: The name of the page/feature (e.g. profile, product_details)
+    prompt: What is the page/feature name?

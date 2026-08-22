@@ -1,0 +1,84 @@
+# Miscellaneous & OS
+*.class
+*.log
+*.pyc
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+.atom/
+.buildlog/
+.history
+.svn/
+
+# Environment Variables & Secrets
+.env
+.env.*
+*.env
+!.env.example
+
+# Android & Signing Keys
+**/key.properties
+**/android/app/key.properties
+**/local.properties
+**/android/local.properties
+**/android/.gradle/
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+*.pk8
+
+# Firebase & Cloud Credentials / Service Accounts
+*service-account*.json
+*firebase-adminsdk*.json
+*credentials*.json
+
+# iOS / macOS Secrets & Signing
+ios/Runner/Assets.xcassets/
+*.mode1v3
+*.mode2v3
+*.moved-aside
+*.pbxuser
+*.perspectivev3
+**/Pods/
+**/Podfile.lock
+*.mobileprovision
+*.cer
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+
+# Flutter / Dart Build & Cache
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+pubspec_overrides.yaml
+build/
+*.apk
+*.aab
+*.ipa
+coverage/
+
+# Mason CLI
+.mason/
+.mason-cache/
+
+# IntelliJ IDEA / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Test projects created during setup
+test_project*
+test_bloc_app*

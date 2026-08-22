@@ -1,0 +1,65 @@
+name: CI — Analyze & Test
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [develop]
+
+jobs:
+  analyze_and_test:
+    name: Analyze & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      # ── Checkout ────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Flutter setup ────────────────────────────────────────────────────────
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.0'   # Pin to your team's Flutter version
+          channel: stable
+          cache: true
+
+      # ── Dependencies ─────────────────────────────────────────────────────────
+      - name: Install dependencies (workspace root)
+        run: flutter pub get
+
+      # ── Format check ─────────────────────────────────────────────────────────
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      # ── Analyze ──────────────────────────────────────────────────────────────
+      - name: Analyze (core package)
+        run: flutter analyze --fatal-infos
+        working-directory: features/core
+
+      - name: Analyze (dashboard package)
+        run: flutter analyze --fatal-infos
+        working-directory: features/dashboard
+
+      - name: Analyze (auth package)
+        run: flutter analyze --fatal-infos
+        working-directory: features/auth
+
+      - name: Analyze (root app)
+        run: flutter analyze --fatal-infos
+
+      # ── Tests ────────────────────────────────────────────────────────────────
+      - name: Run tests (core package)
+        run: flutter test --coverage
+        working-directory: features/core
+
+      - name: Run tests (root app)
+        run: flutter test --coverage
+
+      # ── Coverage report ──────────────────────────────────────────────────────
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage/lcov.info
+          fail_ci_if_error: false

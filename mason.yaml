@@ -1,0 +1,5 @@
+bricks:
+  cl_bloc:
+    path: bricks/cl_bloc
+  cl_page:
+    path: bricks/cl_page

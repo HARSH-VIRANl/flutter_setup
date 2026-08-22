@@ -1,0 +1,25 @@
+name: dashboard
+description: "Dashboard feature module containing Home & Settings screens."
+version: 0.0.1
+homepage: none
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: '^3.6.0'
+  flutter: ">=3.24.0"
+
+dependencies:
+  core:
+    path: ../core
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_screenutil: ^5.9.3
+  google_fonts: ^8.2.1
+
+dev_dependencies:
+  bloc_test: ^10.0.0
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

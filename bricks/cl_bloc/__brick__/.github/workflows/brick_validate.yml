@@ -1,0 +1,82 @@
+name: Validate Brick
+
+on:
+  push:
+    paths:
+      - 'bricks/**'
+      - '.github/workflows/brick_validate.yml'
+  pull_request:
+    paths:
+      - 'bricks/**'
+
+jobs:
+  validate_brick:
+    name: Validate cl_bloc Brick
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.27.0'
+          channel: stable
+          cache: true
+
+      - name: Install Dart dependencies
+        run: flutter pub get
+
+      # ── Install Mason CLI ──────────────────────────────────────────────────
+      - name: Install Mason CLI
+        run: dart pub global activate mason_cli
+
+      # ── Create a test Flutter project ─────────────────────────────────────
+      - name: Create test Flutter project
+        run: |
+          flutter create --project-name test_project test_project
+          echo "✅ Test project created"
+
+      # ── Register brick locally ─────────────────────────────────────────────
+      - name: Add cl_bloc brick globally
+        run: |
+          export PATH="$PATH:$HOME/.pub-cache/bin"
+          dart pub global run mason_cli:mason add -g cl_bloc --path bricks/cl_bloc
+
+      # ── Generate brick into test project ──────────────────────────────────
+      - name: Generate cl_bloc brick
+        run: |
+          export PATH="$PATH:$HOME/.pub-cache/bin"
+          cd test_project
+          dart pub global run mason_cli:mason make cl_bloc --on-conflict overwrite
+          echo "✅ Brick generated successfully"
+
+      # ── Validate generated output compiles ─────────────────────────────────
+      - name: Install workspace dependencies
+        run: flutter pub get
+        working-directory: test_project
+
+      - name: Analyze core package
+        run: flutter analyze --fatal-infos
+        working-directory: test_project/features/core
+
+      - name: Analyze dashboard package
+        run: flutter analyze --fatal-infos
+        working-directory: test_project/features/dashboard
+
+      - name: Analyze auth package
+        run: flutter analyze --fatal-infos
+        working-directory: test_project/features/auth
+
+      - name: Analyze root app
+        run: flutter analyze --fatal-infos
+        working-directory: test_project
+
+      - name: Build generated project (debug)
+        run: flutter build apk --debug
+        working-directory: test_project
+
+      - name: Cleanup test project
+        run: rm -rf test_project

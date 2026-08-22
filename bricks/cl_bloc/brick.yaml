@@ -1,0 +1,14 @@
+name: cl_bloc
+description: A production-ready Flutter BLoC project scaffold with built-in light/dark theming, DI, networking, localization, and git hooks.
+
+# Uncomment and update before publishing to brickhub.dev
+# repository: https://github.com/HARSH-VIRANl/flutter_project_setup
+
+version: 3.1.0
+
+environment:
+  mason: ^0.1.1
+
+# No prompts — all configuration is automatic.
+# The package name is read from pubspec.yaml by pre_gen.dart.
+vars: {}

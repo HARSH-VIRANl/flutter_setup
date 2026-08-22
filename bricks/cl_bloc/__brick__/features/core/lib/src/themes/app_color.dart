@@ -1,0 +1,81 @@
+import 'package:flutter/material.dart';
+
+class LightThemeColor {
+  static const Color primaryColor = Color(0xFF7349D3);
+  static const Color primaryColorLight = Color(0xFF8C73C8);
+  static const Color primaryColorDark = Color(0xFF7349D3);
+  static const Color backgroundColor = Color(0xFFFFFFFF);
+  static const Color cardColor = Color(0xFFFFFFFF);
+  static const Color successColor = Colors.lightGreen;
+  static const Color errorColor = Color(0xFFE53935);
+  static const Color textColor = Color(0xFF252525);
+  static const Color secondaryColor = Color(0xFF707070);
+  static const Color decorationColor = Color(0xFFE8E6EA);
+  static const Color appColor = primaryColor;
+  static const Color disableColor = Color(0x61000000);
+  static const Color highlightColor = Color(0x00000000);
+  static const Color splashColor = Color(0x1fffffff);
+  static const Color focusColor = Color(0x1f000000);
+  static const Color hoverColor = Color(0x0a000000);
+  static const Color hintColor = Color(0xFF000000);
+  static const Color cardSecondaryTextColor = Color(0xFFB6B6B6);
+  static const Color secondaryTextColor = Color(0xFF0A1D32);
+  static const Color dividerColor = Color(0xFFEEEEEE);
+  static const Color taskDetailTextColor = Color(0xFF5C5C5C);
+  static const Color borderColor = Color(0xFFD9C9FF);
+  static const Color lightPurpleColor = Color(0xFF8C73C8);
+  static const Color greenColor = Color(0xFF4CAF50);
+  static const Color redColor = Color(0xFFFF6262);
+  static const Color imageBorderColor = Color(0xFF9A9A9A);
+  static const Color whiteColor = Color(0xFFFFFFFF);
+  static const Color primaryTextColor = Color(0xFF1B1D23);
+  static const Color tabBorderColor = Color(0xFFEEEEEE);
+  static const Color shadowColor = Color(0x0F000000);
+  static const Color onlineColor = Color(0xFF34D399);
+  static const Color startDateOfCompanyColor = Color(0xFFE64C3C);
+  static const Color rmEmpProfileDOBColor = Color(0xFFFFEE63);
+  static const Color vmObservationsBgColor = Color(0x1443A5FF);
+  static const Color vmScannerBgColor = Color(0x14954CAF);
+  static const Color vmAcceptedColor = Color(0xff79C567);
+  static const Color vmAcceptedRedColor = Color(0xffFF6262);
+}
+
+class DarkThemeColor {
+  static const Color primaryColor = Color(0xFF212121);
+  static const Color primaryColorLight = Color(0xFF9e9e9e);
+  static const Color primaryColorDark = Color(0xFF212121);
+  static const Color backgroundColor = Color(0xFF303030);
+  static const Color cardColor = Color(0xFF424242);
+  static const Color successColor = Colors.green;
+  static const Color errorColor = Color(0xFFbd2827);
+  static const Color textColor = Colors.white;
+  static const Color secondaryColor = Colors.white;
+  static const Color appColor = Color(0xFF212121);
+  static const Color disableColor = Color(0x61ffffff);
+  static const Color highlightColor = Color(0x29ffffff);
+  static const Color splashColor = Color(0x1fffffff);
+  static const Color focusColor = Color(0x1fffffff);
+  static const Color hoverColor = Color(0x0affffff);
+  static const Color hintColor = Color(0xFF000000);
+  static const Color cardSecondaryTextColor = Color(0xFFB6B6B6);
+  static const Color secondaryTextColor = Color(0xFF0A1D32);
+  static const Color dividerColor = Color(0xFFEEEEEE);
+  static const Color taskDetailTextColor = Color(0xFF5C5C5C);
+  static const Color borderColor = Color(0xFFD9C9FF);
+  static const Color lightPurpleColor = Color(0xFF8C73C8);
+  static const Color greenColor = Color(0xFF4CAF50);
+  static const Color redColor = Color(0xFFFF6262);
+  static const Color imageBorderColor = Color(0xFF9A9A9A);
+  static const Color whiteColor = Color(0xFFFFFFFF);
+
+  static const Color primaryTextColor = Color(0xFF1B1D23);
+  static const Color tabBorderColor = Color(0xFFEEEEEE);
+  static const Color shadowColor = Color(0x0F000000);
+  static const Color onlineColor = Color(0xFF34D399);
+  static const Color startDateOfCompanyColor = Color(0xFFE64C3C);
+  static const Color rmEmpProfileDOBColor = Color(0xFFFFEE63);
+  static const Color vmObservationsBgColor = Color(0x1443A5FF);
+  static const Color vmScannerBgColor = Color(0x14954CAF);
+  static const Color vmAcceptedColor = Color(0xff79C567);
+  static const Color vmAcceptedRedColor = Color(0xffFF6262);
+}
