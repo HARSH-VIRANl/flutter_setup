@@ -45,9 +45,10 @@ Future<void> _writePubspecConfig(HookContext context) async {
         }
       }
 
-      // ── Normalize flutter_lints to flexible caret range ───────────────
+      // ── Normalize flutter_lints and inject melos dev_dependency ──────
       if (line.trim().startsWith('flutter_lints:')) {
         buffer.writeln('  flutter_lints: ^6.0.0');
+        buffer.writeln('  melos: ^8.0.0');
         continue;
       }
 
@@ -106,6 +107,47 @@ Future<void> _writePubspecConfig(HookContext context) async {
     buffer.writeln('  main_locale: en');
     buffer.writeln('  arb_dir: lib/l10n');
     buffer.writeln('  output_dir: features/core/lib/src/gen');
+
+    // ── Append melos configuration block ──────────────────────────────────
+    buffer.writeln();
+    buffer.writeln('melos:');
+    buffer.writeln('  command:');
+    buffer.writeln('    bootstrap:');
+    buffer.writeln('      usePubWorkspaces: true');
+    buffer.writeln('  scripts:');
+    buffer.writeln('    bootstrap:');
+    buffer.writeln('      run: melos exec -- flutter pub get');
+    buffer.writeln('      description: Install dependencies for all packages');
+    buffer.writeln('    analyze:');
+    buffer.writeln('      run: melos exec -- flutter analyze --fatal-infos');
+    buffer.writeln('      description: Run dart analyze across all packages');
+    buffer.writeln('    format:');
+    buffer.writeln('      run: melos exec -- dart format .');
+    buffer.writeln('      description: Format all Dart code');
+    buffer.writeln('    format:check:');
+    buffer.writeln('      run: melos exec -- dart format --output=none --set-exit-if-changed .');
+    buffer.writeln('      description: Check formatting without modifying');
+    buffer.writeln('    fix:');
+    buffer.writeln('      run: melos exec -- dart fix --apply');
+    buffer.writeln('      description: Apply dart fixes across all packages');
+    buffer.writeln('    test:');
+    buffer.writeln('      run: melos exec --fail-fast -- flutter test');
+    buffer.writeln('      description: Run tests across all packages');
+    buffer.writeln('    test:coverage:');
+    buffer.writeln('      run: melos exec -- flutter test --coverage');
+    buffer.writeln('      description: Run tests with coverage');
+    buffer.writeln('    build:android:');
+    buffer.writeln('      run: flutter build apk --release');
+    buffer.writeln('      description: Build Android release APK');
+    buffer.writeln('    build:ios:');
+    buffer.writeln('      run: flutter build ios --release --no-codesign');
+    buffer.writeln('      description: Build iOS release');
+    buffer.writeln('    build:runner:');
+    buffer.writeln('      run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs');
+    buffer.writeln('      description: Run build_runner for code generation');
+    buffer.writeln('    gen:page:');
+    buffer.writeln('      run: mason make cl_page -o lib/screens');
+    buffer.writeln('      description: Generate a new BLoC page/feature');
 
     // ── Single atomic write ───────────────────────────────────────────────
     await pubSpecFile.writeAsString(buffer.toString());
