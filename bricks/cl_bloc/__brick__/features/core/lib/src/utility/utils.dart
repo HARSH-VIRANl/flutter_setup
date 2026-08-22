@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:core/core_exports.dart';
 import 'package:flutter/material.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:external_path/external_path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -135,16 +135,25 @@ class Utils {
 
   static void hideKeyboard() => FocusManager.instance.primaryFocus?.unfocus();
 
-  static Future<String> getDownloadsDirectoryPath() async {
-    var downloadsPath = await ExternalPath.getExternalStoragePublicDirectory(
-      ExternalPath.DIRECTORY_DOWNLOAD,
-    );
-    return downloadsPath;
+  static Future<String?> getDownloadsDirectoryPath() async {
+    Directory? directory;
+    if (Platform.isAndroid) {
+      directory = await getDownloadsDirectory() ?? await getExternalStorageDirectory();
+    } else if (Platform.isIOS) {
+      directory = await getApplicationDocumentsDirectory();
+    } else {
+      directory = await getDownloadsDirectory();
+    }
+    return directory?.path;
   }
 
-  /// Opens file from Downloads folder
+  /// Opens file from Downloads / Documents folder
   static Future<void> openFile(String fileName) async {
-    var downloadsPath = await getDownloadsDirectoryPath();
+    final downloadsPath = await getDownloadsDirectoryPath();
+    if (downloadsPath == null) {
+      AppLogger.w('Could not resolve download directory path.');
+      return;
+    }
     final filePath = '$downloadsPath/$fileName';
     final file = File(filePath);
     if (file.existsSync()) {
