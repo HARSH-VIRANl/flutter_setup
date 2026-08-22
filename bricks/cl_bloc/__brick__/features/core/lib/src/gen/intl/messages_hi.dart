@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkThemeActive": MessageLookupByLibrary.simpleMessage("डार्क थीम सक्रिय"),
         "lightThemeActive": MessageLookupByLibrary.simpleMessage("लाइट थीम सक्रिय"),
         "themeDark": MessageLookupByLibrary.simpleMessage("डार्क"),
+        "themeLight": MessageLookupByLibrary.simpleMessage("लाइट"),
         "cancel": MessageLookupByLibrary.simpleMessage("रद्द करें"),
         "confirm": MessageLookupByLibrary.simpleMessage("पुष्टि करें"),
         "ok": MessageLookupByLibrary.simpleMessage("ठीक है"),

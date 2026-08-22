@@ -96,6 +96,7 @@ class S {
   String get darkThemeActive => Intl.message('Dark theme active', name: 'darkThemeActive');
   String get lightThemeActive => Intl.message('Light theme active', name: 'lightThemeActive');
   String get themeDark => Intl.message('Dark', name: 'themeDark');
+  String get themeLight => Intl.message('Light', name: 'themeLight');
   String get cancel => Intl.message('Cancel', name: 'cancel');
   String get confirm => Intl.message('Confirm', name: 'confirm');
   String get ok => Intl.message('OK', name: 'ok');

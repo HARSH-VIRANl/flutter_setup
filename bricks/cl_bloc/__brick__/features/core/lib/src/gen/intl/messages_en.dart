@@ -70,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "darkThemeActive": MessageLookupByLibrary.simpleMessage("Dark theme active"),
         "lightThemeActive": MessageLookupByLibrary.simpleMessage("Light theme active"),
         "themeDark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "themeLight": MessageLookupByLibrary.simpleMessage("Light"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
