@@ -5,7 +5,7 @@ Future<void> run(HookContext context) async {
   await _writePubspecConfig(context);
   await _installDependencies(context);
   await _runDartFormat(context);
-  await _runDartFix(context);
+  // Dart fix is omitted during generation for speed. Run `melos run fix` anytime later.
   await _runGitScript(context);
 }
 

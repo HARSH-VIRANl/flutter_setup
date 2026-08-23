@@ -100,7 +100,9 @@ echo ""
 # ── 7. Generate project (overwrite conflicts automatically) ───────────────────
 
 echo "⚙️  Generating project structure..."
-echo "   (This installs dependencies — may take 1–2 minutes)"
+echo "   ▶ Configuring pubspec.yaml with Pub Workspaces & features..."
+echo "   ▶ Installing workspace dependencies (flutter pub get)..."
+echo "   ▶ Formatting code (dart format)..."
 echo ""
 $MASON_CMD make cl_bloc --on-conflict overwrite
 
