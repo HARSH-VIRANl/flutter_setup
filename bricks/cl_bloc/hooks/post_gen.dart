@@ -140,6 +140,12 @@ Future<void> _writePubspecConfig(HookContext context) async {
     buffer.writeln('    build:runner:');
     buffer.writeln('      run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs');
     buffer.writeln('      description: Run build_runner for code generation (e.g. melos run build:runner)');
+    buffer.writeln('    gen:assets:');
+    buffer.writeln('      run: melos exec --scope="core" -- flutter pub run build_runner build --delete-conflicting-outputs');
+    buffer.writeln('      description: Generate type-safe assets in features/core using flutter_gen (e.g. melos run gen:assets)');
+    buffer.writeln('    gen:assets:watch:');
+    buffer.writeln('      run: melos exec --scope="core" -- flutter pub run build_runner watch --delete-conflicting-outputs');
+    buffer.writeln('      description: Watch and auto-generate assets in features/core (e.g. melos run gen:assets:watch)');
     buffer.writeln('    gen:page:');
     buffer.writeln('      run: mason make cl_page -o lib/screens');
     buffer.writeln('      description: Generate a new BLoC page in lib/screens (e.g. melos run gen:page -- --name profile)');

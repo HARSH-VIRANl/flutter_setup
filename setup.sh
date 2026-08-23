@@ -100,9 +100,13 @@ echo ""
 # ── 7. Generate project (overwrite conflicts automatically) ───────────────────
 
 echo "⚙️  Generating project structure..."
-echo "   ▶ Configuring pubspec.yaml with Pub Workspaces & features..."
+echo "   ▶ Running template generation and hooks..."
 echo "   ▶ Installing workspace dependencies (flutter pub get)..."
-echo "   ▶ Formatting code (dart format)..."
+echo "   ▶ Formatting code (dart format) & applying fixes (dart fix)..."
+echo "   ℹ️  Note: This step may take 1–2 minutes without output. Please wait."
+echo "   💡 If it hangs: close VS Code / Android Studio to release dart_tool locks,"
+echo "      or press Ctrl+C and run: $MASON_CMD make cl_bloc --on-conflict overwrite --no-hooks"
+echo "     dart pub global run mason_cli:mason make cl_bloc --on-conflict overwrite --no-hooks"
 echo ""
 $MASON_CMD make cl_bloc --on-conflict overwrite
 

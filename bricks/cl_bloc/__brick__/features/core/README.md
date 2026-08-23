@@ -1,39 +1,85 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Core Package (`features/core`)
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+The **Core Package** contains shared foundations, centralized image asset management, network services, design systems, base widgets, and utilities used across all feature modules in the monorepo.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+---
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## 🎨 Centralized Image Asset Management (`flutter_gen`)
 
-## Features
+All static images, SVGs, and Lottie animations are managed centrally in `features/core/assets/` and generated into type-safe Dart classes using `flutter_gen`.
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+### 1. Asset Folder Structure
+```text
+features/core/assets/
+├── anim/            # Lottie animations (.json)
+├── images/          # Raster images (.png, .jpg, .webp, 2.0x, 3.0x)
+│   ├── 2.0x/
+│   ├── 3.0x/
+│   └── back.png
+└── svg/             # Vector icons (.svg)
 ```
 
-## Additional information
+### 2. Generating Assets
+When adding new images to `features/core/assets/images/`, generate the type-safe classes with Melos:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```bash
+# Generate assets once
+melos run gen:assets
+
+# Or run in watch mode during development
+melos run gen:assets:watch
+```
+
+### 3. Using Generated Assets Anywhere Across the Monorepo
+
+All assets are configured with `package = 'core'` by default in `AssetGenImage`, so they work out-of-the-box in any feature module without needing manual package prefixes.
+
+```dart
+import 'package:core/core_exports.dart';
+
+// 1. Render as Image widget:
+Assets.images.back.image(
+  width: 24.w,
+  height: 24.w,
+  fit: BoxFit.cover,
+);
+
+// 2. Use as ImageProvider (e.g. CircleAvatar or BoxDecoration):
+CircleAvatar(
+  backgroundImage: Assets.images.back.provider(),
+);
+
+Container(
+  decoration: BoxDecoration(
+    image: DecorationImage(
+      image: Assets.images.back.provider(),
+      fit: BoxFit.cover,
+    ),
+  ),
+);
+
+// 3. Access raw asset path:
+final String imagePath = Assets.images.back.path;
+```
+
+---
+
+## 🌐 Networking Layer
+
+### `BaseApiProvider` & `ResponseHandler`
+- Provides typed HTTP methods (`getMethod`, `postMethod`, `putMethod`, `deleteMethod`, `multipartPost`)
+- **`tryParseList<T>`**: Safely parses a dynamic JSON list into a strongly typed `List<T>` without failing the entire request if one item fails.
+
+---
+
+## 📦 How to Use in Features
+Add `core` dependency in your feature's `pubspec.yaml`:
+```yaml
+dependencies:
+  core:
+    path: ../core
+```
+Then import everything with a single import:
+```dart
+import 'package:core/core_exports.dart';
+```

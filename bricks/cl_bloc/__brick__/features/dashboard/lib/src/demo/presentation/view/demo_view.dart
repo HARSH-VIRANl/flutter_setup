@@ -43,8 +43,8 @@ class DemoView extends StatelessWidget {
                 context.read<DemoBloc>().add(const GetDemoDataEvent());
               },
               onSuccess: () {
-                final data = state.demoData;
-                if (data == null || data.users.isEmpty) {
+                final users = state.users;
+                if (users.isEmpty) {
                   return Center(
                     child: Text(
                       S.of(context).noUsersFound,
@@ -52,7 +52,7 @@ class DemoView extends StatelessWidget {
                     ),
                   );
                 }
-                return DemoContent(data: data);
+                return DemoContent(users: users);
               },
             );
           },

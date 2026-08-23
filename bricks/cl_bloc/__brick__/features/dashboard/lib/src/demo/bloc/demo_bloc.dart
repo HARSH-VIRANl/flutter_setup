@@ -32,14 +32,15 @@ class DemoBloc extends Bloc<DemoEvent, DemoState> {
           ),
         );
       },
-      (demoData) {
+      (users) {
         emit(
           state.copyWith(
             status: BaseStateStatus.success,
-            demoData: demoData,
+            users: users,
           ),
         );
       },
     );
   }
 }
+

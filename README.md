@@ -64,7 +64,9 @@ melos run
 | Command | Description | Example |
 |---|---|---|
 | `bootstrap` | Install dependencies for all packages | `melos run bootstrap` |
-| `build:runner` | Run `build_runner` code generation | `melos run build:runner` |
+| `build:runner` | Run `build_runner` code generation across all packages | `melos run build:runner` |
+| `gen:assets` | Generate type-safe assets in `features/core` with `flutter_gen` | `melos run gen:assets` |
+| `gen:assets:watch` | Watch and auto-generate assets in `features/core` | `melos run gen:assets:watch` |
 | `format` | Format all Dart code | `melos run format` |
 | `format:check` | Check formatting for CI without changes | `melos run format:check` |
 | `analyze` | Analyze all packages with `--fatal-infos` | `melos run analyze` |
@@ -80,12 +82,43 @@ melos run
 
 ---
 
+## 🎨 Centralized Image Asset Management (`flutter_gen`)
+
+All images, SVGs, and animations are centralized in `features/core/assets/` and typed via `flutter_gen` with package support enabled out-of-the-box:
+
+1. **Add Images**: Place `.png`, `.jpg`, or `.webp` files in `features/core/assets/images/`.
+2. **Generate Dart Classes**:
+   ```powershell
+   melos run gen:assets
+   ```
+3. **Use in Any Feature Widget**:
+   ```dart
+   import 'package:core/core_exports.dart';
+
+   // Render as Image widget:
+   Assets.images.back.image(
+     width: 24.w,
+     height: 24.w,
+     fit: BoxFit.cover,
+   )
+
+   // Use as ImageProvider:
+   CircleAvatar(
+     backgroundImage: Assets.images.back.provider(),
+   )
+
+   // Access raw asset path:
+   final String path = Assets.images.back.path;
+   ```
+
+---
+
 ## 🧱 Architecture Overview
 
 ```
 ├── lib/                     # Main app entrypoint & root routing
 ├── features/
-│   ├── core/                # Shared UI, themes, networking, DI, localization
+│   ├── core/                # Shared UI, assets, themes, networking, DI, localization
 │   ├── auth/                # Authentication feature package
 │   └── dashboard/           # Dashboard feature package
 ├── assets/

@@ -54,6 +54,15 @@ scripts:
     run: melos exec --depends-on="build_runner" -- flutter pub run build_runner build --delete-conflicting-outputs
     description: Run build_runner code generation across all packages (e.g. melos run build:runner)
 
+  # ── Asset Generation (flutter_gen) ──────────────────────────────────────────
+  gen:assets:
+    run: melos exec --scope="core" -- flutter pub run build_runner build --delete-conflicting-outputs
+    description: Generate type-safe assets in features/core using flutter_gen (e.g. melos run gen:assets)
+
+  gen:assets:watch:
+    run: melos exec --scope="core" -- flutter pub run build_runner watch --delete-conflicting-outputs
+    description: Watch and auto-generate assets in features/core (e.g. melos run gen:assets:watch)
+
   # ── Code Generation (Mason Bricks) ─────────────────────────────────────────
   gen:page:
     run: mason make cl_page -o lib/screens

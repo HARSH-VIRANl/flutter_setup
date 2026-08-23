@@ -19,6 +19,16 @@ class $AssetsAnimGen {
   List<String> get values => [noInternetAvailable];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/back.png
+  AssetGenImage get back => const AssetGenImage('assets/images/back.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [back];
+}
+
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
@@ -36,6 +46,7 @@ class Assets {
   Assets._();
 
   static const $AssetsAnimGen anim = $AssetsAnimGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
@@ -64,7 +75,7 @@ class AssetGenImage {
     bool matchTextDirection = false,
     bool gaplessPlayback = false,
     bool isAntiAlias = false,
-    String? package,
+    String? package = 'core',
     FilterQuality filterQuality = FilterQuality.low,
     int? cacheWidth,
     int? cacheHeight,
@@ -99,7 +110,7 @@ class AssetGenImage {
 
   ImageProvider provider({
     AssetBundle? bundle,
-    String? package,
+    String? package = 'core',
   }) {
     return AssetImage(
       _assetName,

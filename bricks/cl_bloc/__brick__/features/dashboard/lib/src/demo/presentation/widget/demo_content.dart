@@ -5,9 +5,9 @@ import '../../data/model/demo_model.dart';
 import 'user_card.dart';
 
 class DemoContent extends StatelessWidget {
-  final DemoModel data;
+  final List<DemoUserModel> users;
 
-  const DemoContent({super.key, required this.data});
+  const DemoContent({super.key, required this.users});
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +97,7 @@ class DemoContent extends StatelessWidget {
                 ),
                 SizedBox(height: 6.h),
                 Text(
-                  'Flow: Page (Direct DI) → Bloc → UseCase → Repository → ResponseHandler',
+                  'Flow: Page (Direct DI) → Bloc → UseCase (tryParseList) → Repository → ResponseHandler',
                   style: GoogleFonts.poppins(
                     color: Colors.white.withOpacity(0.8),
                     fontSize: 10.5.sp,
@@ -126,7 +126,7 @@ class DemoContent extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: Text(
-                  '${data.users.length} ${S.of(context).usersLoaded}',
+                  '${users.length} ${S.of(context).usersLoaded}',
                   style: GoogleFonts.poppins(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,
@@ -139,7 +139,7 @@ class DemoContent extends StatelessWidget {
           SizedBox(height: 12.h),
 
           // Users List
-          ...data.users.map((user) => UserCard(user: user)),
+          ...users.map((user) => UserCard(user: user)),
         ],
       ),
     );
