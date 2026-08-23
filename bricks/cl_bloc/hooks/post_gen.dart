@@ -163,63 +163,64 @@ Future<void> _writePubspecConfig(HookContext context) async {
 }
 
 Future<void> _installDependencies(HookContext context) async {
-  final progress = context.logger.progress('Running flutter pub get across workspace...');
+  context.logger.info('📦 Resolving and downloading workspace dependencies (flutter pub get)...');
   try {
-    final result = await Process.run(
+    final process = await Process.start(
       'flutter',
       ['pub', 'get'],
       workingDirectory: Directory.current.path,
       runInShell: true,
+      mode: ProcessStartMode.inheritStdio,
     );
+    final exitCode = await process.exitCode;
 
-    if (result.exitCode == 0) {
-      progress.complete('Workspace dependencies installed ✅');
+    if (exitCode == 0) {
+      context.logger.info('✅ Workspace dependencies installed successfully.');
     } else {
-      progress.fail('flutter pub get failed:\n${result.stderr}');
+      context.logger.err('❌ flutter pub get failed with exit code $exitCode.');
     }
 
     // Resolve mason bricks locally
-    await Process.run(
+    context.logger.info('🧱 Resolving local mason bricks...');
+    final masonProcess = await Process.start(
       'mason',
       ['get'],
       workingDirectory: Directory.current.path,
       runInShell: true,
+      mode: ProcessStartMode.inheritStdio,
     );
+    await masonProcess.exitCode;
   } catch (e) {
-    progress.fail('Unable to run flutter pub get: ${e.toString()}');
+    context.logger.err('❌ Unable to run flutter pub get: ${e.toString()}');
   }
 }
 
 Future<void> _runDartFormat(HookContext context) async {
-  final progress = context.logger.progress('Running dart format...');
+  context.logger.info('🎨 Formatting Dart code across workspace...');
   try {
-    await Process.run('dart', ['format', '.'], runInShell: true);
-    progress.complete('dart format done ✅');
+    final process = await Process.start(
+      'dart',
+      ['format', '.'],
+      runInShell: true,
+      mode: ProcessStartMode.inheritStdio,
+    );
+    await process.exitCode;
+    context.logger.info('✅ Dart format complete.');
   } catch (e) {
-    progress.fail('dart format failed: ${e.toString()}');
-  }
-}
-
-Future<void> _runDartFix(HookContext context) async {
-  final progress = context.logger.progress('Running dart fix --apply...');
-  try {
-    await Process.run('dart', ['fix', '--apply'], runInShell: true);
-    progress.complete('dart fix done ✅');
-  } catch (e) {
-    progress.fail('dart fix failed: ${e.toString()}');
+    context.logger.err('❌ dart format failed: ${e.toString()}');
   }
 }
 
 Future<void> _runGitScript(HookContext context) async {
-  final progress = context.logger.progress('Installing git hooks...');
   try {
+    final hookFile = File('scripts/install-hooks.bash');
+    if (!hookFile.existsSync()) return;
+
     final result = await Process.run('sh', ['scripts/install-hooks.bash'], runInShell: true);
     if (result.exitCode == 0) {
-      progress.complete('Git hooks installed ✅');
-    } else {
-      progress.fail('Git hook install failed:\n${result.stderr}');
+      context.logger.info('✅ Git hooks installed.');
     }
-  } catch (e) {
-    progress.fail('Unable to install git hooks: ${e.toString()}');
+  } catch (_) {
+    // Ignored on platforms without sh
   }
 }
